@@ -1,5 +1,3 @@
-Aqui está um **passo a passo detalhado** para começar a usar o Direct3D de forma simples:
-
 ---
 
 ### **Passo 1: Instalar o Visual Studio**
@@ -10,19 +8,19 @@ Aqui está um **passo a passo detalhado** para começar a usar o Direct3D de for
 
 ### **Passo 2: Criar um Novo Projeto**
 1. **Abra o Visual Studio**.
-2. No menu principal, selecione **File > New > Project**.
+2. No menu principal, clique em **Arquivo > Novo > Projeto**.
 3. Na janela de criação de projeto:
    - Selecione **Aplicativo de Desktop Windows** (C++).
-   - Escolha um nome para o seu projeto (por exemplo, `Direct3DExample`).
+   - Escolha um nome para o seu projeto (por exemplo, `ExemploDirect3D`).
    - Escolha uma pasta de destino.
 4. Clique em **Criar**.
 
 ---
 
 ### **Passo 3: Adicionar as Bibliotecas do Direct3D**
-1. **No Solution Explorer** (Explorador de Soluções), clique com o botão direito no projeto e vá em **Propriedades**.
-2. No menu lateral, vá até **Linker > Input**.
-3. No campo **Additional Dependencies** (Dependências Adicionais), adicione as seguintes bibliotecas:
+1. **No Gerenciador de Soluções** (Solution Explorer), clique com o botão direito no projeto e selecione **Propriedades**.
+2. No menu lateral, vá até **Vinculador > Entrada**.
+3. No campo **Dependências Adicionais**, adicione as seguintes bibliotecas:
    - `d3d11.lib`
    - `dxgi.lib`
    - `d3dcompiler.lib`
@@ -31,7 +29,7 @@ Aqui está um **passo a passo detalhado** para começar a usar o Direct3D de for
 
 ### **Passo 4: Configurar a Janela para Renderização**
 1. No arquivo `main.cpp` gerado automaticamente pelo projeto, remova o código padrão e substitua-o pelo código abaixo:
-   
+
 ```cpp
 #include <windows.h>
 #include <d3d11.h>
@@ -94,7 +92,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int nCmdShow) {
     WNDCLASSEX wc = { sizeof(WNDCLASSEX), CS_CLASSDC, WindowProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, "Direct3DWindow", NULL };
     RegisterClassEx(&wc);
-    HWND hwnd = CreateWindow(wc.lpszClassName, "Direct3D Example", WS_OVERLAPPEDWINDOW, 100, 100, 800, 600, NULL, NULL, wc.hInstance, NULL);
+    HWND hwnd = CreateWindow(wc.lpszClassName, "Exemplo Direct3D", WS_OVERLAPPEDWINDOW, 100, 100, 800, 600, NULL, NULL, wc.hInstance, NULL);
 
     if (!InitializeDirect3D(hwnd)) {
         return -1;  // Se Direct3D falhar
@@ -126,8 +124,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int nCmdShow) {
 ---
 
 ### **Passo 5: Compilar e Executar o Projeto**
-1. **Compile o projeto** clicando em **Build > Build Solution**.
-2. **Execute o projeto** clicando em **Debug > Start Without Debugging**.
+1. **Compile o projeto** clicando em **Compilar > Compilar Solução**.
+2. **Execute o projeto** clicando em **Depurar > Iniciar Sem Depuração**.
 
 Se tudo estiver correto, uma janela de 800x600 será aberta com uma tela de fundo azul. Esta é a tela renderizada pelo Direct3D.
 
@@ -139,6 +137,6 @@ Agora que você tem um projeto básico de Direct3D rodando, você pode:
 - Adicionar **texturas** e **modelos 3D**.
 - Trabalhar com **movimentação de câmera** e outros elementos interativos.
 
---- 
+---
 
-Esse passo a passo inicializa o Direct3D de forma simples, permitindo renderizar uma cor de fundo e abrir caminho para gráficos mais avançados!
+Esse passo a passo inicializa o Direct3D de forma simples no Visual Studio em português, permitindo que você comece a criar gráficos 3D!
