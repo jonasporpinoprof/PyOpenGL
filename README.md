@@ -1,142 +1,194 @@
----
+### Aula 06 -  Computação Gráfica: Introdução ao PyOpenGL
 
-### **Passo 1: Instalar o Visual Studio**
-1. **Baixe e instale o Visual Studio** (preferencialmente a versão mais recente).
-2. Durante a instalação, selecione a opção **Desenvolvimento para Desktop com C++** para garantir que as ferramentas necessárias sejam instaladas.
-
----
-
-### **Passo 2: Criar um Novo Projeto**
-1. **Abra o Visual Studio**.
-2. No menu principal, clique em **Arquivo > Novo > Projeto**.
-3. Na janela de criação de projeto:
-   - Selecione **Aplicativo de Desktop Windows** (C++).
-   - Escolha um nome para o seu projeto (por exemplo, `ExemploDirect3D`).
-   - Escolha uma pasta de destino.
-4. Clique em **Criar**.
+#### Objetivo:
+Nesta aula, você aprenderá o que é o **PyOpenGL**, como instalá-lo em sistemas operacionais Linux e Windows, além de ver um exemplo prático de uso. Ao final, você deverá ser capaz de criar aplicações gráficas 3D simples usando Python e PyOpenGL.
 
 ---
 
-### **Passo 3: Adicionar as Bibliotecas do Direct3D**
-1. **No Gerenciador de Soluções** (Solution Explorer), clique com o botão direito no projeto e selecione **Propriedades**.
-2. No menu lateral, vá até **Vinculador > Entrada**.
-3. No campo **Dependências Adicionais**, adicione as seguintes bibliotecas:
-   - `d3d11.lib`
-   - `dxgi.lib`
-   - `d3dcompiler.lib`
+### 1. O que é o PyOpenGL?
+
+O **PyOpenGL** é uma biblioteca Python que fornece acesso às funcionalidades do OpenGL, uma API padrão para renderização de gráficos 2D e 3D. Ele é amplamente utilizado em desenvolvimento de jogos, simulações gráficas e renderização científica.
 
 ---
 
-### **Passo 4: Configurar a Janela para Renderização**
-1. No arquivo `main.cpp` gerado automaticamente pelo projeto, remova o código padrão e substitua-o pelo código abaixo:
+### 2. Pré-requisitos
 
-```cpp
-#include <windows.h>
-#include <d3d11.h>
-#include <dxgi.h>
+- Conhecimento básico de Python.
+- Noções básicas de gráficos 3D (opcional).
 
-// Ponteiros Direct3D
-ID3D11Device* device = nullptr;
-ID3D11DeviceContext* context = nullptr;
-IDXGISwapChain* swapChain = nullptr;
-ID3D11RenderTargetView* renderTargetView = nullptr;
+---
 
-// Função para inicializar Direct3D
-bool InitializeDirect3D(HWND hwnd) {
-    DXGI_SWAP_CHAIN_DESC swapChainDesc = {};
-    swapChainDesc.BufferCount = 1;
-    swapChainDesc.BufferDesc.Width = 800;       // Largura da janela
-    swapChainDesc.BufferDesc.Height = 600;      // Altura da janela
-    swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-    swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-    swapChainDesc.OutputWindow = hwnd;
-    swapChainDesc.SampleDesc.Count = 4;         // Anti-aliasing
-    swapChainDesc.Windowed = TRUE;              // Janela
+### 3. Instalação do PyOpenGL
 
-    // Criação do dispositivo Direct3D, contexto e swap chain
-    HRESULT hr = D3D11CreateDeviceAndSwapChain(
-        nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, 0, nullptr, 0,
-        D3D11_SDK_VERSION, &swapChainDesc, &swapChain, &device, nullptr, &context);
-    if (FAILED(hr)) {
-        return false;
-    }
+#### 3.1. Instalação no Linux
 
-    // Criar Render Target View
-    ID3D11Texture2D* backBuffer = nullptr;
-    swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&backBuffer);
-    device->CreateRenderTargetView(backBuffer, nullptr, &renderTargetView);
-    context->OMSetRenderTargets(1, &renderTargetView, nullptr);
-    backBuffer->Release();
+Existem duas maneiras principais de instalar o PyOpenGL no Linux: usando o gerenciador de pacotes do sistema (como `zypper`, `apt` ou `dnf`), ou instalando através do `pip` em um ambiente virtual. Vamos cobrir ambos os métodos.
 
-    return true;
-}
+##### 3.1.1. Usando o Gerenciador de Pacotes (exemplo: openSUSE com `zypper`)
+1. Abra um terminal.
+2. Instale o PyOpenGL com o seguinte comando:
 
-// Função de renderização (limpa a tela)
-void Render() {
-    float clearColor[] = { 0.0f, 0.2f, 0.4f, 1.0f };  // Cor de fundo
-    context->ClearRenderTargetView(renderTargetView, clearColor);
-    swapChain->Present(0, 0);  // Apresenta o buffer
-}
+   ```bash
+   sudo zypper install python311-PyOpenGL
+   ```
 
-// Função de callback da janela
-LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
-    switch (uMsg) {
-    case WM_DESTROY:
-        PostQuitMessage(0);
-        return 0;
-    }
-    return DefWindowProc(hwnd, uMsg, wParam, lParam);
-}
+##### 3.1.2. Usando um Ambiente Virtual
 
-// Função principal
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int nCmdShow) {
-    WNDCLASSEX wc = { sizeof(WNDCLASSEX), CS_CLASSDC, WindowProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, "Direct3DWindow", NULL };
-    RegisterClassEx(&wc);
-    HWND hwnd = CreateWindow(wc.lpszClassName, "Exemplo Direct3D", WS_OVERLAPPEDWINDOW, 100, 100, 800, 600, NULL, NULL, wc.hInstance, NULL);
+Se preferir instalar o PyOpenGL sem modificar o sistema, siga os passos para criar um ambiente virtual:
 
-    if (!InitializeDirect3D(hwnd)) {
-        return -1;  // Se Direct3D falhar
-    }
+1. Crie um ambiente virtual:
+   ```bash
+   python3.11 -m venv /caminho/para/venv
+   ```
 
-    ShowWindow(hwnd, nCmdShow);
-    UpdateWindow(hwnd);
+2. Ative o ambiente virtual:
+   ```bash
+   source /caminho/para/venv/bin/activate
+   ```
 
-    MSG msg = {};
-    while (msg.message != WM_QUIT) {
-        if (PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE)) {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
-        } else {
-            Render();  // Chama a função de renderização
-        }
-    }
+3. Instale o PyOpenGL e sua aceleração:
+   ```bash
+   pip install PyOpenGL PyOpenGL_accelerate
+   ```
 
-    // Limpeza
-    renderTargetView->Release();
-    swapChain->Release();
-    context->Release();
-    device->Release();
+Agora, o PyOpenGL está instalado e pronto para ser utilizado no seu ambiente virtual.
 
-    return 0;
-}
+#### 3.2. Instalação no Windows
+
+##### 3.2.1. Instalando com `pip`
+
+1. Certifique-se de ter o **Python** e o **pip** instalados. Se ainda não tiver, baixe e instale a versão mais recente do [site oficial do Python](https://www.python.org/downloads/).
+   
+2. Abra o **Prompt de Comando** (cmd) ou **PowerShell**.
+
+3. Execute o comando para instalar o PyOpenGL e o PyOpenGL_accelerate:
+   ```bash
+   pip install PyOpenGL PyOpenGL_accelerate
+   ```
+
+Agora você já pode utilizar o PyOpenGL no seu ambiente Python do Windows.
+
+##### 3.2.2. Instalando um Ambiente Virtual (Opcional)
+
+Se você preferir usar um ambiente virtual no Windows, siga os passos:
+
+1. Crie um ambiente virtual:
+   ```bash
+   python -m venv C:\caminho\para\venv
+   ```
+
+2. Ative o ambiente virtual:
+   ```bash
+   C:\caminho\para\venv\Scripts\activate
+   ```
+
+3. Instale o PyOpenGL:
+   ```bash
+   pip install PyOpenGL PyOpenGL_accelerate
+   ```
+
+---
+
+### 4. Exemplo de Uso do PyOpenGL
+
+Agora que o PyOpenGL está instalado, vamos criar um exemplo básico de uma janela com um cubo 3D.
+
+#### 4.1. Código: Exemplo de Cubo 3D
+
+Este exemplo cria uma janela e renderiza um cubo rotativo usando o **PyOpenGL**.
+
+```python
+import pygame
+from pygame.locals import *
+from OpenGL.GL import *
+from OpenGL.GLU import *
+
+vertices = (
+    (1, -1, -1),
+    (1, 1, -1),
+    (-1, 1, -1),
+    (-1, -1, -1),
+    (1, -1, 1),
+    (1, 1, 1),
+    (-1, -1, 1),
+    (-1, 1, 1)
+)
+
+edges = (
+    (0, 1),
+    (1, 2),
+    (2, 3),
+    (3, 0),
+    (4, 5),
+    (5, 6),
+    (6, 7),
+    (7, 4),
+    (0, 4),
+    (1, 5),
+    (2, 6),
+    (3, 7)
+)
+
+def draw_cube():
+    glBegin(GL_LINES)
+    for edge in edges:
+        for vertex in edge:
+            glVertex3fv(vertices[vertex])
+    glEnd()
+
+def main():
+    pygame.init()
+    display = (800, 600)
+    pygame.display.set_mode(display, DOUBLEBUF | OPENGL)
+    gluPerspective(45, (display[0] / display[1]), 0.1, 50.0)
+    glTranslatef(0.0, 0.0, -5)
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+
+        glRotatef(1, 3, 1, 1)
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+        draw_cube()
+        pygame.display.flip()
+        pygame.time.wait(10)
+
+if __name__ == "__main__":
+    main()
 ```
 
----
+#### 4.2. Executando o Exemplo
 
-### **Passo 5: Compilar e Executar o Projeto**
-1. **Compile o projeto** clicando em **Compilar > Compilar Solução**.
-2. **Execute o projeto** clicando em **Depurar > Iniciar Sem Depuração**.
+- **Linux:** Execute o arquivo Python no terminal:
+  ```bash
+  python3 teste.py
+  ```
 
-Se tudo estiver correto, uma janela de 800x600 será aberta com uma tela de fundo azul. Esta é a tela renderizada pelo Direct3D.
-
----
-
-### **Passo 6: Expansão e Exploração**
-Agora que você tem um projeto básico de Direct3D rodando, você pode:
-- Explorar **shaders** para renderizar gráficos 3D mais complexos.
-- Adicionar **texturas** e **modelos 3D**.
-- Trabalhar com **movimentação de câmera** e outros elementos interativos.
+- **Windows:** No Prompt de Comando, navegue até o diretório do arquivo e execute:
+  ```bash
+  python teste.py
+  ```
 
 ---
 
-Esse passo a passo inicializa o Direct3D de forma simples no Visual Studio em português, permitindo que você comece a criar gráficos 3D!
+### 5. Resumo
+
+- O **PyOpenGL** permite criar gráficos 2D e 3D usando Python.
+- No **Linux**, o PyOpenGL pode ser instalado via `zypper` ou em um ambiente virtual.
+- No **Windows**, a instalação pode ser feita diretamente com `pip`.
+- Um exemplo prático de cubo 3D foi apresentado para ilustrar o uso do PyOpenGL com o **Pygame** para criar uma janela gráfica.
+
+---
+
+### 6. Atividades
+
+1. Instale o PyOpenGL no seu sistema (Linux ou Windows).
+2. Execute o exemplo do cubo 3D.
+3. Experimente modificar as dimensões e cores do cubo.
+4. Crie uma nova forma geométrica, como uma pirâmide ou esfera.
+
+---
+
+Isso conclui a aula sobre PyOpenGL!
