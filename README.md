@@ -203,12 +203,14 @@ if __name__ == "__main__":
 
 ---
 
-### 6. Atividades
+### 6. Prática
 
 1. Instale o PyOpenGL no seu sistema (Linux ou Windows).
 2. Execute o exemplo do cubo 3D.
-3. Experimente modificar as dimensões e cores do cubo.
-4. Crie uma nova forma geométrica, como uma pirâmide ou esfera.
+3. Experimente modificar as dimensões e cores do cubo. (opcional) 
+4. Crie uma nova forma geométrica, como uma pirâmide ou esfera. (opcional)
+5. Envie o seu código para seu repositório no GitHub, (pode ser um novo repositório ou um existente)
+6. Envie para o seguinte forms: bit.ly/3Xul44j
 
 ---
 
