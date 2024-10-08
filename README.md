@@ -146,13 +146,13 @@ edges = (
     (2, 3),
     (3, 0),
     (4, 5),
-    (5, 6),
+    (5, 6), # Modifique
     (6, 7),
-    (7, 4),
+    (7, 4), # Modifique
     (0, 4),
     (1, 5),
-    (2, 6),
-    (3, 7)
+    (2, 6), # Modifique
+    (3, 7)  # Modifique
 )
 
 def draw_cube():
