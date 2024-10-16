@@ -46,10 +46,10 @@ Agora que o PyOpenGL está instalado, vamos criar um exemplo básico de uma jane
 
 Este exemplo cria uma janela e renderiza um cubo rotativo usando o **PyOpenGL**.
 
-```python
-Aqui está o código com comentários explicativos:
 
-```python
+### Aqui está o código com comentários explicativos:
+
+```
 import pygame
 from pygame.locals import *
 from OpenGL.GL import *
