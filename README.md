@@ -154,8 +154,14 @@ from OpenGL.GLU import *
 ### Definição de Vértices e Arestas
 ```python
 vertices = (
-    (1, -1, -1), (1, 1, -1), (-1, 1, -1), (-1, -1, -1),
-    (1, -1, 1), (1, 1, 1), (-1, -1, 1), (-1, 1, 1)
+    (1, -1, -1),
+    (1, 1, -1),
+    (-1, 1, -1),
+    (-1, -1, -1),
+    (1, -1, 1),
+    (1, 1, 1),
+    (-1, -1, 1),
+    (-1, 1, 1)
 )
 ```
 - Estes são os vértices que definem os 8 cantos do cubo no espaço 3D.
