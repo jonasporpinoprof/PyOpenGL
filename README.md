@@ -132,9 +132,6 @@ if __name__ == "__main__":
 ```
 
 Esses comentários explicam o propósito de cada parte do código e como as funções e variáveis se relacionam na criação e exibição de um cubo 3D usando Pygame e OpenGL.
-```
-
-```
 
 ---
 
