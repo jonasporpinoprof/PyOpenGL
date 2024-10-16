@@ -134,17 +134,7 @@ if __name__ == "__main__":
 Esses comentários explicam o propósito de cada parte do código e como as funções e variáveis se relacionam na criação e exibição de um cubo 3D usando Pygame e OpenGL.
 ```
 
-#### 4.2. Executando o Exemplo
-
-- **Linux:** Execute o arquivo Python no terminal:
-  ```bash
-  python3 teste.py
-  ```
-
-- **Windows:** No Prompt de Comando, navegue até o diretório do arquivo e execute:
-  ```bash
-  python teste.py
-  ```
+```
 
 ---
 
