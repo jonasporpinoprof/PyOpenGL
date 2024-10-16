@@ -1,6 +1,6 @@
 ### Aula 06 -  Computação Gráfica: Introdução ao PyOpenGL
 
-O **OpenGL** (Open Graphics Library) é uma API (Interface de Programação de Aplicações) padrão e amplamente utilizada para desenvolver gráficos 2D e 3D. Foi criada para facilitar a criação de imagens, cenas e animações com qualidade gráfica elevada, oferecendo uma maneira eficiente de interagir com o hardware gráfico.
+**OpenGL** (Open Graphics Library) é uma API (Interface de Programação de Aplicações) padrão e amplamente utilizada para desenvolver gráficos 2D e 3D. Foi criada para facilitar a criação de imagens, cenas e animações com qualidade gráfica elevada, oferecendo uma maneira eficiente de interagir com o hardware gráfico.
 
 ### Características principais do OpenGL:
 - **Independência de Plataforma:** Funciona em diversos sistemas operacionais, como Windows, macOS e Linux, além de dispositivos móveis com versões especializadas como OpenGL ES.
@@ -30,91 +30,19 @@ Em resumo, o OpenGL é uma ferramenta fundamental para desenvolvedores que preci
 
 O **PyOpenGL** é uma biblioteca Python que fornece acesso às funcionalidades do OpenGL, uma API padrão para renderização de gráficos 2D e 3D. Ele é amplamente utilizado em desenvolvimento de jogos, simulações gráficas e renderização científica.
 
----
 
-### 2. Pré-requisitos
-
-- Conhecimento básico de Python.
-- Noções básicas de gráficos 3D (opcional).
-
----
-
-### 3. Instalação do PyOpenGL
-
-#### 3.1. Instalação no Linux
-
-Existem duas maneiras principais de instalar o PyOpenGL no Linux: usando o gerenciador de pacotes do sistema (como `zypper`, `apt` ou `dnf`), ou instalando através do `pip` em um ambiente virtual. Vamos cobrir ambos os métodos.
-
-##### 3.1.1. Usando o Gerenciador de Pacotes (exemplo: openSUSE com `zypper`)
-1. Abra um terminal.
-2. Instale o PyOpenGL com o seguinte comando:
-
-   ```bash
-   sudo zypper install python311-PyOpenGL
-   ```
-
-##### 3.1.2. Usando um Ambiente Virtual
-
-Se preferir instalar o PyOpenGL sem modificar o sistema, siga os passos para criar um ambiente virtual:
-
-1. Crie um ambiente virtual:
-   ```bash
-   python3.11 -m venv /caminho/para/venv
-   ```
-
-2. Ative o ambiente virtual:
-   ```bash
-   source /caminho/para/venv/bin/activate
-   ```
-
-3. Instale o PyOpenGL e sua aceleração:
-   ```bash
-   pip install PyOpenGL PyOpenGL_accelerate
-   ```
-
-Agora, o PyOpenGL está instalado e pronto para ser utilizado no seu ambiente virtual.
-
-#### 3.2. Instalação no Windows
-
-##### 3.2.1. Instalando com `pip`
-
-1. Certifique-se de ter o **Python** e o **pip** instalados. Se ainda não tiver, baixe e instale a versão mais recente do [site oficial do Python](https://www.python.org/downloads/).
-   
-2. Abra o **Prompt de Comando** (cmd) ou **PowerShell**.
-
-3. Execute o comando para instalar o PyOpenGL e o PyOpenGL_accelerate:
-   ```bash
-   pip install PyOpenGL PyOpenGL_accelerate
-   ```
-
-Agora você já pode utilizar o PyOpenGL no seu ambiente Python do Windows.
-
-##### 3.2.2. Instalando um Ambiente Virtual (Opcional)
-
-Se você preferir usar um ambiente virtual no Windows, siga os passos:
-
-1. Crie um ambiente virtual:
-   ```bash
-   python -m venv C:\caminho\para\venv
-   ```
-
-2. Ative o ambiente virtual:
-   ```bash
-   C:\caminho\para\venv\Scripts\activate
-   ```
-
-3. Instale o PyOpenGL:
+ ## Instale o PyOpenGL:
    ```bash
    pip install PyOpenGL PyOpenGL_accelerate
    ```
 
 ---
 
-### 4. Exemplo de Uso do PyOpenGL
+### Exemplo de Uso do PyOpenGL
 
 Agora que o PyOpenGL está instalado, vamos criar um exemplo básico de uma janela com um cubo 3D.
 
-#### 4.1. Código: Exemplo de Cubo 3D
+#### Código: Exemplo de Cubo 3D
 
 Este exemplo cria uma janela e renderiza um cubo rotativo usando o **PyOpenGL**.
 
@@ -220,24 +148,103 @@ Esses comentários explicam o propósito de cada parte do código e como as fun�
 
 ---
 
-### 5. Resumo
 
-- O **PyOpenGL** permite criar gráficos 2D e 3D usando Python.
-- No **Linux**, o PyOpenGL pode ser instalado via `zypper` ou em um ambiente virtual.
-- No **Windows**, a instalação pode ser feita diretamente com `pip`.
-- Um exemplo prático de cubo 3D foi apresentado para ilustrar o uso do PyOpenGL com o **Pygame** para criar uma janela gráfica.
+## Explicação sobre o Código
 
----
+Este código usa as bibliotecas `Pygame` e `PyOpenGL` para criar uma janela e renderizar um cubo 3D rotativo. Vou explicar o código em partes:
 
-### 6. Prática
+### Importações
+```python
+import pygame
+from pygame.locals import *
+from OpenGL.GL import *
+from OpenGL.GLU import *
+```
+- `pygame`: Biblioteca para criar janelas e gerenciar eventos.
+- `pygame.locals`: Contém constantes como `DOUBLEBUF` e `OPENGL` que são usadas para criar a janela com buffers duplos e suporte OpenGL.
+- `OpenGL.GL` e `OpenGL.GLU`: Funções e constantes do OpenGL para renderização gráfica e utilitários OpenGL, como `glVertex3fv` (para definir vértices) e `gluPerspective` (para definir a perspectiva da câmera).
 
-1. Instale o PyOpenGL no seu sistema (Linux ou Windows).
-2. Execute o exemplo do cubo 3D.
-3. Experimente modificar as dimensões e cores do cubo. (opcional) 
-4. Crie uma nova forma geométrica, como uma pirâmide ou esfera. (opcional)
-5. Envie o seu código para seu repositório no GitHub, (pode ser um novo repositório ou um existente)
-6. Envie para o seguinte forms: bit.ly/3Xul44j
+### Definição de Vértices e Arestas
+```python
+vertices = (
+    (1, -1, -1), (1, 1, -1), (-1, 1, -1), (-1, -1, -1),
+    (1, -1, 1), (1, 1, 1), (-1, -1, 1), (-1, 1, 1)
+)
+```
+- Estes são os vértices que definem os 8 cantos do cubo no espaço 3D.
+  - Cada tupla representa um ponto no espaço tridimensional (x, y, z).
 
----
+```python
+edges = (
+    (0, 1),
+    (1, 2),
+    (2, 3),
+    (3, 0),
+    (4, 5),
+    (5, 6), # Modifique
+    (6, 7),
+    (7, 4), # Modifique
+    (0, 4),
+    (1, 5),
+    (2, 6), # Modifique
+    (3, 7)  # Modifique
+)
+```
+- `edges` contém pares de índices que definem as 12 arestas do cubo, onde cada índice se refere a um vértice da lista `vertices`.
+- As arestas são os segmentos de linha que conectam dois vértices.
 
-Isso conclui a aula sobre PyOpenGL!
+### Função `draw_cube`
+```python
+def draw_cube():
+    glBegin(GL_LINES)
+    for edge in edges:
+        for vertex in edge:
+            glVertex3fv(vertices[vertex])
+    glEnd()
+```
+- Esta função desenha o cubo.
+- `glBegin(GL_LINES)` diz ao OpenGL para começar a desenhar linhas.
+- Para cada aresta em `edges`, ela acessa os vértices correspondentes e os passa para `glVertex3fv`, que define os pontos no espaço 3D.
+- `glEnd()` finaliza o desenho das linhas.
+
+### Função `main`
+```python
+def main():
+    pygame.init()
+    display = (800, 600)
+    pygame.display.set_mode(display, DOUBLEBUF | OPENGL)
+```
+- Inicializa o `pygame` e cria uma janela com tamanho 800x600 pixels, usando buffers duplos (`DOUBLEBUF`) para suavizar a animação e suporte OpenGL (`OPENGL`).
+
+```python
+    gluPerspective(45, (display[0] / display[1]), 0.1, 50.0)
+    glTranslatef(0.0, 0.0, -5)
+```
+- `gluPerspective(45, ...)`: Define a perspectiva de visualização da câmera. O primeiro argumento é o campo de visão (45 graus), o segundo é a proporção da tela (largura/altura), e os dois últimos valores são o plano de corte próximo (0.1) e o plano de corte distante (50.0).
+- `glTranslatef(0.0, 0.0, -5)`: Move a cena para trás no eixo Z, para que o cubo fique visível.
+
+### Loop Principal
+```python
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+```
+- Este loop captura eventos do `pygame`. Se o evento `QUIT` (fechamento da janela) for detectado, o programa encerra.
+
+```python
+        glRotatef(1, 3, 1, 1)
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+        draw_cube()
+        pygame.display.flip()
+        pygame.time.wait(10)
+```
+- `glRotatef(1, 3, 1, 1)`: Rota a cena em torno dos eixos X, Y e Z. Neste caso, o cubo está girando de forma contínua.
+- `glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)`: Limpa o buffer de cor e o buffer de profundidade antes de desenhar o próximo quadro.
+- `draw_cube()`: Desenha o cubo.
+- `pygame.display.flip()`: Atualiza a tela com o que foi desenhado.
+- `pygame.time.wait(10)`: Pausa a execução por 10 milissegundos, controlando a velocidade da animação.
+
+### Resumo
+Este código cria uma janela usando `Pygame` e renderiza um cubo 3D rotativo com `OpenGL`, utilizando vértices e arestas definidos manualmente. O cubo é desenhado usando linhas (`GL_LINES`) para representar suas arestas, e a perspectiva da câmera é configurada com `gluPerspective`.
