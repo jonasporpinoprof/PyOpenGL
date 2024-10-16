@@ -134,8 +134,10 @@ if __name__ == "__main__":
 Esses comentários explicam o propósito de cada parte do código e como as funções e variáveis se relacionam na criação e exibição de um cubo 3D usando Pygame e OpenGL.
 
 ---
-
-
+---
+## Envio a Atividade 06 no Link a seguir:
+  <bit.ly/3Xul44j>
+---
 ## Explicação sobre o Código
 
 Este código usa as bibliotecas `Pygame` e `PyOpenGL` para criar uma janela e renderizar um cubo 3D rotativo. Vou explicar o código em partes:
