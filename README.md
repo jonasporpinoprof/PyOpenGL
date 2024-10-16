@@ -26,7 +26,7 @@ Ao criar gráficos 3D, como um cubo rotacionando, o OpenGL é usado para definir
 
 Em resumo, o OpenGL é uma ferramenta fundamental para desenvolvedores que precisam criar gráficos e animações eficientes e interativas, permitindo que eles aproveitem ao máximo os recursos de hardware gráfico disponíveis.
 
-### 1. O que é o PyOpenGL?
+### O que é o PyOpenGL?
 
 O **PyOpenGL** é uma biblioteca Python que fornece acesso às funcionalidades do OpenGL, uma API padrão para renderização de gráficos 2D e 3D. Ele é amplamente utilizado em desenvolvimento de jogos, simulações gráficas e renderização científica.
 
