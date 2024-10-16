@@ -49,7 +49,7 @@ Este exemplo cria uma janela e renderiza um cubo rotativo usando o **PyOpenGL**.
 
 ### Aqui está o código com comentários explicativos:
 
-```
+```python
 import pygame
 from pygame.locals import *
 from OpenGL.GL import *
